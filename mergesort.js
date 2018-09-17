@@ -14,6 +14,7 @@ function merge(array) {
   while (firstArr.length > 0 && secondArr.length > 0) {
     if (firstArr[0] < secondArr[0]) merged.push(firstArr.shift());
     else if (firstArr[0] >= secondArr[0]) merged.push(secondArr.shift());
+
     if (firstArr.length === 0) return (merged = [...merged, ...secondArr]); //merged.concat(secondArr);
     if (secondArr.length === 0) return (merged = [...merged, ...firstArr]); //merged.concat(firstArr);
   }
@@ -21,7 +22,16 @@ function merge(array) {
   return merged;
 }
 
-function mergeSort(array) {}
+function mergeSort(array) {
+  let left = split(array)[0];
+  let right = split(array)[1];
 
-console.log(merge([[2, 8], [3, 4, 7]]));
-console.log(merge([[1, 100], [2, 200]]));
+  if (left.length + right.length < 2) {
+    return array;
+  }
+
+  return merge([mergeSort(left), mergeSort(right)]);
+}
+
+// console.log(mergeSort([2, 3, 312, 21, 21, 8]));
+// console.log(mergeSort([2, 1]));
